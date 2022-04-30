@@ -1,1 +1,10 @@
-site_name: My Docs
+site_name: ScriptSharks
+site_description: Exploring the world of dangerous code.
+site_author: Christopher M. Steffen
+copyright: Copyright &copy; 2022 Christopher M. Steffen.<br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+site_url: http://scriptsharks.github.io/
+repo_url: https://github.com/scriptsharks/scriptsharks.source
+theme: windmill-dark
+extra:
+    logo: img/logo.png
+    version: 0.0.1
