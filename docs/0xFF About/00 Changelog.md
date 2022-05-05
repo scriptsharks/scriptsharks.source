@@ -1,6 +1,12 @@
 ---
 title: "Changelog"
 ---
+# Version 0.1.2
+* Expanded "In the Beginning" section.
+    * Added "Wabbit" and "Animal."
+* Cited Wikipedia in the Introduction.
+    * Included link for reporting issues.
+
 # Version 0.1.1
 * Fixed Bugs.
     * Incorrect version number in page header.

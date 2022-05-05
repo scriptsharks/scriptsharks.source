@@ -14,4 +14,6 @@ In pursuit of answers, we should consider not only today's headlines, but the hi
 
 The following sections aim to provide an overview of malware history, from its origins to the present day. The full timeline of malware history is beyond the scope of this website, so we must distill it, curating the most interesting and useful elements for our purpose. We hope you enjoy our selection.
 
-Without further ado, let us begin at the beginning.
+Also, much of this information is gathered from [Wikipedia](https://en.wikipedia.org/wiki/Timeline_of_computer_viruses_and_worms), which will make many college professors cringe. To those professors, I say: [submit an issue on GitHub](https://github.com/scriptsharks/scriptsharks.github.io/issues) if you find a mistake in this content, and if you're feeling _really_ generous, correct the mistake on Wikipedia. (Just be sure to cite a credible source.)
+
+Without further ado, let us begin.
