@@ -29,3 +29,21 @@ Like Cain slaying Abel, the conflict between Reaper and Creeper set the stage fo
 Speaking of battles for digital supremacy, Creeper and Reaper also inspired the creation of [Core War](https://en.wikipedia.org/wiki/Core_War) in 1984, a computer programming game wherein software "warriors" fight for dominance in a virtual computer. Warrior programs were written in "Redcode," a primitive form of Assembly Language designed specifically for the game.
 
 Fictionalized versions of Reaper also featured as antagonists in the Japanese anime TV series [Digimon](https://en.wikipedia.org/wiki/Digimon_Tamers). So cool.
+
+# Wascally Wabbits
+
+The first [fork bomb](https://en.wikipedia.org/wiki/Fork_bomb) dropped in 1974 in the form of "Wabbit" (or "Rabbit," depending on who you ask). The program would "fork" itself in memory ad infinitum, draining resources until the affected systems ground to a halt. The malware earned its name from the rate at which the program reproduced.
+
+Fun trivia: A similar fork bomb plays a significant role in ScriptSharks history! (But that's a story for a different time.)
+
+# Think of an Animal...
+
+In 1975, John Walker created the first [Trojan Horse](https://en.wikipedia.org/wiki/Trojan_horse_(computing)) malware as a mechanism for distributing a video game he had designed. The game was called ANIMAL, and was quite the clever iteration upon the old "guess the animal" games of the day. John's ANIMAL script included a bunch of nifty tricks that drew inspiration from [ELIZA](https://en.wikipedia.org/wiki/ELIZA) to present a more life-like, adaptive experience. The game was quite popular, and everyone wanted a copy. Rather than write the program to a bunch of drives and shipping them to all his buddies, John took a more creative approach. He created a subroutine, called PERVADE, which ran in the background as users were playing the game. The PERVADE subroutine would scan the system for accessible directories, checking to see whether a copy of ANIMAL existed in that directory. If not, PERVADE would create a copy of the game in that directory. Otherwise, it would check to see if the running version was newer than the saved copy, replacing older versions with newer ones. The trojan spread through the system, gaining greater access as more powerful users played the game. In time, it spread to external media, thus spreading to other systems.
+
+Within a month of its release, ANIMAL had spread across numerous [Univac](https://en.wikipedia.org/wiki/Univac) computers, eventually making its way to Univac's software development center in Minnesota. Rumor has it, Univac (the organization) inadvertently shipped software distribution tapes which contained ANIMAL. If true, this could be the first instance of a [supply-chain attack](https://en.wikipedia.org/wiki/Supply_chain_attack) (though it was, admittedly, unintentional).
+
+After recognizing how wide-spread ANIMAL had become, John and his associates considered how they might go about cleaning up the ANIMAL mess. They brainstormed, considered releasing a HUNTER program to spread and destroy the ANIMALs (much like Reaper before it), but in the end the problem was solved without any intervention necessary; Univac released a new Operating System, which handled filesystems in a slightly different manner. The change was minor, but it was enough to break the PERVADE subroutine, thus rendering ANIMAL toothless.
+
+# End of the Beginning
+
+These stories are legends, indicative of the playful nature of early hackers. Many of the "Old Guard" reminisce about this era, when hackers were clever pranksters, driven by passion rather than malice. Alas, nothing lasts, and the 1980s witnessed an explosion of the first truly malicious malware in history.
