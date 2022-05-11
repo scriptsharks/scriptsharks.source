@@ -8,4 +8,4 @@ remote_branch: main
 theme: windmill-dark
 extra:
     logo: img/logo.png
-    version: 0.1.2
+    version: 0.1.3
