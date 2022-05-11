@@ -14,11 +14,15 @@ There's no getting rid of malware. Like the mythical hydra, for every strain we 
 
 > "If you know the enemy and know yourself, you need not fear the result of a hundred battles." ~Sun Tzu, _The Art of War_
 
-ScriptSharks aims to document modern malware design and analysis techniques in the hopes that this information will help defenders to understand and prevent malware attacks in the future. It is currently the work of a single author; as such, it will grow and expand along with the author's own knowledge and skill.
+ScriptSharks aims to document the art and history of malware design and analysis, in the hopes that this information will help defenders to understand and prevent malware attacks in the future. It is currently the work of a single author; as such, it will grow and expand along with the author's own knowledge and skill.
 
 ***
 
 ## News
+
+### 2022.05.11
+
+After exploring malware's [early days](/0x00 History/01 In The Beginning/), witness the [malware explosion](/0x00 History/02 Malware Explosion/) of the 80s in the latest Malware History section!
 
 ### 2022.05.05
 

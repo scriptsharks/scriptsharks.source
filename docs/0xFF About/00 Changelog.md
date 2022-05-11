@@ -1,6 +1,10 @@
 ---
 title: "Changelog"
 ---
+# Version 0.1.3
+* Added "Malware Explosion" section.
+    * This covers the 80s.
+
 # Version 0.1.2
 * Expanded "In the Beginning" section.
     * Added "Wabbit" and "Animal."
