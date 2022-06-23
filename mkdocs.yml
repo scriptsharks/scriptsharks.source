@@ -5,7 +5,12 @@ copyright: Copyright &copy; 2022 Christopher M. Steffen.<br>This work is license
 site_url: https://www.scriptsharks.com/
 repo_url: https://github.com/scriptsharks/scriptsharks.source
 remote_branch: main
-theme: windmill-dark
+theme:
+    name: null
+    custom_dir: theme/mkdocs_windmill_dark
+    history_buttons: false
+    article_nav_top: true
+    article_nav_bottom: true
 extra:
     logo: img/logo.png
     version: 0.1.3
