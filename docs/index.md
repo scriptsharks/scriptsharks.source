@@ -20,6 +20,10 @@ ScriptSharks aims to document the art and history of malware design and analysis
 
 ## News
 
+### 2022.08.09
+
+The Malware History project continues with our exploration of [the 90s](/0x00 History/03 The 90s.md) and the escalation of the digital arms race!
+
 ### 2022.05.11
 
 After exploring malware's [early days](/0x00 History/01 In The Beginning/), witness the [malware explosion](/0x00 History/02 Malware Explosion/) of the 80s in the latest Malware History section!
