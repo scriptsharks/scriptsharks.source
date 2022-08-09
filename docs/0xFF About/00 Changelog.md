@@ -1,6 +1,11 @@
 ---
 title: "Changelog"
 ---
+
+# Version 0.1.4
+* Fixed a typo in the "Malware Explosion" section.
+* Added "The 90s" section.
+
 # Version 0.1.3
 * Added "Malware Explosion" section.
     * This covers the 80s.
