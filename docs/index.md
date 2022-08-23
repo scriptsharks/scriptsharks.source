@@ -20,6 +20,10 @@ ScriptSharks aims to document the art and history of malware design and analysis
 
 ## News
 
+### 2022.08.23
+
+After considerable reader feedback, I've finally added the [ScriptSharks.com Origin Story](/0xFF About/FD Origins/). Check it out to learn about the site's history!
+
 ### 2022.08.09
 
 The Malware History project continues with our exploration of [the 90s](/0x00 History/03 The 90s/) and the escalation of the digital arms race!
