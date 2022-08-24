@@ -4,9 +4,11 @@ title: "ScriptSharks Origins"
 
 <h1>ScriptSharks Origins</h1>
 
-Grab a drink, pull up a seat, and I'll tell you the story behind **ScriptSharks.com**. I never knew the domain's original owner personally, but he (and his website) changed my life.
+_**Disclaimer:** This story is told from memory. I expect there will be inaccuracies. Where appropriate, I've invented code or console transcripts that attempt to represent data lost to time. I've recreated them as accurately as I can. I aim to tell the truth of my experience, though I cannot guarantee the veracity of every detail._
 
-**Disclaimer:** I'm telling this story from memory, supported by whatever evidence I can find online. I expect there will be some inaccuracies, and where appropriate, I've invented code-snippets and console logs to fill-in for the originals (which are lost to time). I aim to tell the truth of my experience, though I cannot guarantee the veracity of every detail.
+Grab a drink, pull up a seat, and I'll tell you the story behind **ScriptSharks.com**. I never knew the domain's original owner personally, but he (and his website) changed my life... Though, not in the way one might expect.
+
+Read on, and you'll understand.
 
 # Prologue
 
@@ -18,7 +20,7 @@ Back in 2001, I was a punk-ass wannabe hacker in high school. I'd been writing s
 
 (MITRE: [T1593.002](https://attack.mitre.org/techniques/T1593/002/))
 
-In 2003, after learning about [SQL Injection](https://www.w3schools.com/sql/sql_injection.asp), I was eager to practice what I'd learned. Back then, we didn't have sites like [HackTheBox](https://www.hackthebox.com/) providing practice labs. Even [HackThisSite](https://www.hackthissite.org/) was new, and was not well-known. Hackers had two choices: either get legal access to test hardware, or practice your skills "in the wild."
+In 2003, after learning about [SQL Injection](https://www.w3schools.com/sql/sql_injection.asp) (SQLi), I was eager to practice what I'd learned. Back then, we didn't have sites like [HackTheBox](https://www.hackthebox.com/) providing practice labs. Even [HackThisSite](https://www.hackthissite.org/) was new, and was not well-known. Hackers had two choices: either get legal access to test hardware, or practice your skills "in the wild."
 
 I was too broke to afford my own computer, let alone to buy a spare PC for "target practice," and I didn't know any other hackers IRL. I decided to take the risk and practice on live targets. (As a kid, rational thinking and sound judgment were not my strong suits.)
 
@@ -30,21 +32,21 @@ I used my [Google-fu](https://en.wiktionary.org/wiki/Google-fu) to search for vu
 
 In 2000, Stephen "Gabriel" Lane (a.k.a. "Calico Jack")—a [motorcycle enthusiast](https://web.archive.org/web/20040421073844/http://scriptsharks.com/bike/index.php) and [Senior Software Engineer for the New Orleans Saints](https://web.archive.org/web/20030108200615/http://scriptsharks.com/resume.html)—created ScriptSharks.com as a place "[designed by a programmer for programmers](https://web.archive.org/web/20020125192310/http://scriptsharks.com/)," where he could share tutorials, manage code projects, and provide other resources for programmers. He was fluent in numerous programming languages, and provided the full source code for dozens of programs he'd written, all for free.
 
-Truly a go-getter. And generous to boot! Stephen was basically living my dream. And he wasn't much older than me.
+When I first started programming, back in 1995, I didn't have the Internet, and it was hard to find resources from which to learn. So I appreciated when successful people like Stephen shared their code and experience with the community. It seemed like he was living my dream, and he wasn't much older than me.
 
-From his website, I knew that Stephen preferred the Linux operating system, and preferred to develop websites using PHP with the Apache web server and MySQL database. A port scan revealed ports `22` and `80` were open, and not much else. These ports were provided by **OpenSSH** and **Apache**, each fully up-to-date and patched (to my knowledge).
+From his website, I knew that Stephen used the Linux operating system, and designed websites using PHP, hosted with Apache and MySQL. (A typical [LAMP stack](https://en.wikipedia.org/wiki/LAMP_(software_bundle)).) I scanned the server's ports; `22` and `80` were open, but not much else. These ports were provided by **OpenSSH** and **Apache**, each fully up-to-date and patched.
 
 ## Initial Access
 
-Gaining access to the ScriptSharks server was a challenge. I had to identify potential vulnerabilities in the website's backend code, exploit them to extract credentials, and use those credentials to gain console access to the host.
+Curiosity killed the cat. I'm glad I'm not a cat.
 
 ### Vuln Discovery
 
 (MITRE: [T1588.006](https://attack.mitre.org/techniques/T1588/006/))
 
-After learning about Stephen and his technical knowledge, I was excited to explore the guides and source code provided on his site. One of the guides covered [Sessions and Authentication Systems](https://web.archive.org/web/20031218204612/http://www.scriptsharks.com:80/articles/sessions.php), including SQL table layouts and code for checking and terminating user sessions.
+After learning about Stephen and his technical knowledge, I was excited to explore the guides and source code provided on his site. My first stop was his guide to designing [Sessions and Authentication Systems](https://web.archive.org/web/20031218204612/http://www.scriptsharks.com:80/articles/sessions.php) in PHP. My original goal was to practice SQLi attacks; it seemed likely that his site's auth code would be similar to that in his guide, which included SQL table layouts and code samples. If there was a vulnerability to be found, this was a good place to start hunting.
 
-Here's the session-checking code:
+Here's the session-checking code from Stephen's guide:
 
 ```php
 function is_logged_in() {
@@ -67,13 +69,13 @@ $result = mysql_db_query("Your DB", $insert) or die(mysql_error() . "<hr />\n" .
 
 On reading the code, I realized the `SELECT` query was not being sanitized in the `is_logged_in` function, nor was the `UPDATE` query in the logout code. Theoretically, someone could de-authenticate any user they wished, or authenticate as any user, as long as they had some way to control the contents of the `$session_id` variable.
 
-Exploring the site further, I found that Stephen provided project management tools for users of the site, allowing them to create accounts and manage code projects. The site included a [login page](https://web.archive.org/web/20031229230816/http://www.scriptsharks.com/login.php), written in PHP, presumably with a SQL backend.
+Stephen had failed to sanitize database inputs in his guide; perhaps the same would be true of his login page?
 
 ### Vuln Confirmation 
 
 (MITRE: [T1190](https://attack.mitre.org/techniques/T1190/))
 
-I decided to test the login page for SQL injection vulnerabilities. If the `login.php` script were written similar to the code from his tutorial, the code would likely include a SQL query something like this:
+I decided to test the login for SQLi vulnerabilities. If the `login.php` script were written similar to the code from his tutorial, the code would likely include a SQL query something like this:
 
 ```php
 $select = "SELECT * FROM Users WHERE Username = '$username' AND Password = '$password' LIMIT 1";
@@ -81,29 +83,31 @@ $select = "SELECT * FROM Users WHERE Username = '$username' AND Password = '$pas
 
 When called on the database, the `$username` and `$password` variables would be substituted for user-provided values. If I entered `' OR '1'='1` as both the username and password, the query would return the first user in the database. In most cases, the first user in the database is an admin.
 
-I did not actually expect my attack to work. Stephen's tutorial was intended to be basic, for the sake of learning. Considering the experience listed on his resumé, I expected the `$username` and `$password` variables to be sanitized before being passed to the database. So I was legitimately surprised when, upon executing my SQL Injection attack, I was successfully authenticated as the admin user, `sglane`.
+I did not actually expect my attack to work. Stephen's tutorial was intended to be basic, for the sake of learning. Considering the experience listed on his resumé, I expected the `$username` and `$password` variables to be sanitized before being passed to the database. So I was legitimately surprised when, upon executing my SQLi attack, I was successfully authenticated as the admin user, `sglane`.
 
-"Holy crap," I thought. "I got in!" It was an incredible rush. I was simultaneously thrilled that my attack had worked, and terrified that I was going to get caught and arrested under the [CFAA](https://www.nacdl.org/Landing/ComputerFraudandAbuseAct) over a silly SQL injection attack. (It wouldn't be the first time my curiosity got me in trouble.)
+"Holy crap," I thought. "I got in!" It was an incredible rush. I was simultaneously thrilled that my attack had worked, and terrified that I was going to get caught and arrested under the [CFAA](https://www.nacdl.org/Landing/ComputerFraudandAbuseAct) over a silly SQLi attack. (Funny how consequences only came to mind _after_ I'd done the attack.)
 
-My excitement outweighed my fear, however, and I decided to press further. By altering my query, I could skip the `sglane` user and authenticate as the second user in the database:
+I hadn't caused any harm, though; and besides, this was Stephen's personal page, not attached to some hyper-litigious corporation. No harm, no foul, right?
+
+My excitement outweighed my fear. I decided to press further. By altering my query, I could skip the `sglane` user and authenticate as the second user in the database:
 
 * Username: `' OR '1'='1`
 * Password: `' OR '1'='1' AND Username != 'sglane`
 
-Executing my attack, I was successfully authenticated as the second user in the database. From there it was a simple matter to enumerate every user, one by one, simply adding a new `Username != 'blah'` clause to the query for each discovered user.
+Executing the attack, I was successfully authenticated as the second user in the database. From there it was a simple matter to enumerate all the users, one by one, simply adding a new `Username != 'blah'` clause to the query for each discovered user.
 
-Not bad for my first real-world attempt at SQL Injection!
+Not bad for my first real-world attempt at SQLi!
 
 ### Account Compromise
 
 (MITRE: [T1212](https://attack.mitre.org/techniques/T1212/), [T1552](https://attack.mitre.org/techniques/T1552/), [T1586](https://attack.mitre.org/techniques/T1586/))
 
-I was quite pleased with my accomplishment, but I was not done yet. What good are usernames without passwords? I searched around, unable to find an obvious way to retrieve the password from the database. In desperation, I decided to try enumerating the password character-by-character, via a "blind" injection:
+I was quite pleased with my accomplishment, but I was not done yet. What good are usernames without passwords? I searched around, unable to find an obvious way to retrieve the password from the database. I decided to try "blind" injection, enumerating the password character-by-character:
 
 * Username: `sglane`
 * Password: `' OR Password LIKE 'a%`
 
-If the password started with `a`, I'd be authenticated. Otherwise, I'd be returned to the login screen, where I'd check `b`, then `c` and so on, until I found the correct first character. Then I could start on the 2nd character, and so on. Once I'd uncovered the first password, I could move on to the second username, and repeat the process. Without automation, this process could take ages, but I was young and optimistic, and people didn't often use random 20-character passwords back then.
+If the password started with `a`, I'd be authenticated. Otherwise, I'd be returned to the login screen, where I'd check every subsequent character until I found a match. Then I could start on the 2nd character, and so on. Once I'd uncovered the first password, I could move on to the second username, and repeat the process. Without automation, this process could take ages, but I was young and optimistic, and people didn't often use random 20-character passwords back then.
 
 Imagine my surprise when I found the complete password _on the first attempt._
 
@@ -111,7 +115,7 @@ After sending my injected credentials, the site rejected my attempt and returned
 
 Viewing the page source code, I was appalled to discover that the login script, while refusing my attempt, had actually filled in the _correct password for the specified user_, taken straight out of the database. The password was right there, in clear-text, in the HTML of the page.
 
-It appeared that Stephen had designed the script to re-populate the form fields with the user's original input upon returning to the login page, like so:
+It appeared that Stephen had intended the script to re-populate the form fields with the user's original input upon returning to the login page, like so:
 
 ```php
 <?php
@@ -154,11 +158,11 @@ $values = mysql_fetch_array($result);
 
 This is an easy mistake to make, and a difficult one to notice when troubleshooting. If my suspicion was correct, all I had to do was enter the correct username, along with an incorrect password, click "Login," then (after the login was rejected) click "Login" again, and I'd be authenticated as whichever user I wished.
 
-I tried it. It worked.
+I tried. It worked.
 
 10 minutes later I had the passwords for _every single user of ScriptSharks.com_. I could log in as anyone, and see all the projects they had created on the site.
 
-But that wasn't enough. "How far can I go?" I thought. "Can I get root?"
+But that wasn't enough. I was feeling euphoric, my confidence boosted by my success. "How far can I go?" I thought. "Can I get root?"
 
 ### Password Reuse
 
@@ -188,20 +192,20 @@ This worked; I was logged in as `root`.
 
 After obtaining `root` access, I explored the system further.
 
-Reading the `/etc/passwd` file revealed the `www-data` account, which is the default account used by the **Apache** web server. (I could have also dumped the contents of `/etc/shadow` to see the password hashes for system accounts, but I did not have access to a password-cracking utility like [John the Ripper](https://www.openwall.com/john/) at the time, so I left the hashes alone.)
+Reading the `/etc/passwd` file revealed the `www-data` account, which is the default account used by the **Apache** web server. (I could have also dumped the contents of `/etc/shadow` to see the password hashes for other accounts, but I did not have access to a password-cracking utility like [John the Ripper](https://www.openwall.com/john/) at the time, so I left the hashes alone.)
 
 Looking in the `/var/www` directory (the default **Apache** webroot at the time), I discovered that `scriptsharks.com` had its own subdirectory, along with three others*:
 
 ```shell
-root@webserver:/home/sglane# ls /var/www
-total 36K
-drwxr-xr-x 2 root root 4.0K May 12 11:05 retailstore.com
-drwxr-xr-x 2 root root 4.0K May 12 11:05 onlineshop.com
-drwxr-xr-x 2 root root 4.0K May 12 11:05 scriptsharks.com
-drwxr-xr-x 2 root root 4.0K May 12 11:05 phpmyadmin
+root@webserver:/home/sglane# ls -lh /var/www
+total 16K
+drwxr-xr-x 2 root    root 4.0K Aug  9 18:15 onlineshop.com
+drwxr-xr-x 2 root    root 4.0K Dec 30  2001 phpmyadmin
+drwxr-xr-x 2 root    root 4.0K May 12 11:05 retailstore.com
+drwxr-xr-x 2 root    root 4.0K Apr 19 05:02 scriptsharks.com
 ```
 
-_* Note: I have long forgotten the domains for Stephen's two online stores, so I've used `onlineshop.com` and `retailstore.com` as generic substitutions._
+_* Note: I have long forgotten the domains for the two online shops Stephen managed, so I've used `onlineshop.com` and `retailstore.com` as generic substitutions._
 
 Stephen was using one server to host ScriptSharks and two online retail stores, as well as the [phpMyAdmin](https://www.phpmyadmin.net/) web-based MySQL administration tool.
 
@@ -302,7 +306,7 @@ In [2011](https://web.archive.org/web/20110416232547/http://www.scriptsharks.com
 
 Around that time, I was working as a long-haul trucker, making deliveries coast-to-coast. Despite my decades-long passion for coding and hacking, I had never considered myself good enough to "go pro." But in my down-time on the road, I connected with a group of hackers online, many of whom worked in the industry. After observing my skills, they urged me to pursue a career as a penetration tester. In 2019, I left trucking and obtained my [OSCP](https://www.offensive-security.com/pwk-oscp/). In 2020, I was hired as an entry-level security analyst.
 
-Before long, I was teaching new analysts about pentesting methods and techniques. Each time I taught a team about SQL injection, I would tell them the story of ScriptSharks.com, and how Stephen and his website had inspired me. As analysts, my students had been taught "zero trust," and were encouraged to fact-check everything. My story was no exception.
+Before long, I was teaching new analysts about pentesting methods and techniques. Each time I taught a team about SQLi, I would tell them the story of ScriptSharks.com, and how Stephen and his website had inspired me. As analysts, my students had been taught "zero trust," and were encouraged to fact-check everything. My story was no exception.
 
 This is how, in 2021, I discovered that Stephen had passed away the previous year. One of my students, Googling for Stephen's name, found his [obituary](https://obits.nola.com/us/obituaries/nola/name/stephen-lane-obituary?id=2273886) on a local news website. I was saddened at the news. While I had never known Stephen personally, I had thought about him often. It was odd, feeling such a connection with someone I barely knew.
 
