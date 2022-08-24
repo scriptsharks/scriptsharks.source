@@ -2,6 +2,10 @@
 title: "Changelog"
 ---
 
+# Version 0.2.1
+* Added "Millenial Malware" section.
+    * This covers the 00s.
+
 # Version 0.2.0
 * Added "ScriptSharks Origins" article to the "About" section.
 * Updated project organization.
@@ -21,15 +25,12 @@ title: "Changelog"
 * Cited Wikipedia in the Introduction.
     * Included link for reporting issues.
 
-# Version 0.1.1
-* Fixed bugs.
-    * Incorrect version number in page header.
-    * Broken bullet hierarchy in Changelog.
-* Updated changelog organization.
-
 # Older Versions
 
 * 0.1.*
+    * 0.1.1
+        * Fixed bugs.
+        * Updated changelog organization.
     * 0.1.0
         * Created history section.
         * Updated project organization.

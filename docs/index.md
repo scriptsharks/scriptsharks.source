@@ -1,5 +1,5 @@
 ---
-title: Home
+title: "Home"
 ---
 
 # ScriptSharks
@@ -20,6 +20,10 @@ ScriptSharks aims to document the art and history of malware design and analysis
 
 ## News
 
+### 2022.08.24
+
+I added [Millenial Malware](/0x00 History/04 Millenial Malware/) to the history section. Spoiler: It's just so many worms, all over the place...
+
 ### 2022.08.23
 
 After considerable reader feedback, I've finally added the [ScriptSharks.com Origin Story](/0xFF About/FD Origins/). Check it out to learn about the site's history!
@@ -36,9 +40,9 @@ After exploring malware's [early days](/0x00 History/01 In The Beginning/), witn
 
 We've established the [Malware History](/0x00 History/00 Sipping from the Fire Hose/) section, starting with history's earliest malware. Stay tuned for more!
 
-### 2022.04.30
+#### Archives
 
-Today marks the rebirth of ScriptSharks.com! Like a phoenix rising from ashes, except wet, and huge, and with so many teeth...
+Visit the [old news](/old news/) page for older updates.
 
 ***
 
