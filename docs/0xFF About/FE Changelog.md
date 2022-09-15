@@ -2,6 +2,10 @@
 title: "Changelog"
 ---
 
+# Version 0.2.2
+* Added "Ransomware Rising" section.
+    * This covers the 10s.
+
 # Version 0.2.1
 * Added "Millenial Malware" section.
     * This covers the 00s.
@@ -19,15 +23,12 @@ title: "Changelog"
 * Added "Malware Explosion" section.
     * This covers the 80s.
 
-# Version 0.1.2
-* Expanded "In the Beginning" section.
-    * Added "Wabbit" and "Animal."
-* Cited Wikipedia in the Introduction.
-    * Included link for reporting issues.
-
 # Older Versions
 
 * 0.1.*
+    * 0.1.2
+        * Expanded "In the Beginning" section.
+        * Cited Wikipedia in the Introduction.
     * 0.1.1
         * Fixed bugs.
         * Updated changelog organization.
