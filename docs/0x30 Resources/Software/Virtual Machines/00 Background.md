@@ -36,3 +36,11 @@ VMs offer many advantages over Live CDs, such as:
 * Multiple virtualized networks can be configured between guests on a single machine.
 * VMs can be cloned and moved between machines.
 * VMs can be run on cloud services, reducing the need for expensive local hardware and complicated upkeep.
+
+# Which is Best?
+
+For the purposes of malware design and analysis, we advise the use of VMs over Live CDs/USBs, dual-booting, and full-disk installs, as they offer the most flexibility and control. However, there are some reasons and situations for which Live CDs/USBs are preferable:
+
+* Some systems, such as macOS, cannot easily be virtualized.
+* Live CDs/USBs are better-suited for forensic analysis of physical hardware, such as infected hard drives.
+* Some specialized hardware cannot easily be eulated or passed through to a VM.
