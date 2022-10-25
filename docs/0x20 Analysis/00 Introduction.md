@@ -29,4 +29,4 @@ Malware analysis is a dangerous business. Malware authors are constantly develop
 * Maintain a dedicated analysis environment. Do not perform analysis on your production networks and systems. If you must perform analysis in production, ensure that you have clean backups, and if possible, isolate the system from the network to prevent lateral movement.
 * Use virtual machines. Virtual machines are a great way to isolate your analysis environment. Ensure that you have a clean snapshot of the VM before you begin analysis, so that you can restore it quickly. If possible, use a disposable VM, such as Google's [Spot VMs](https://cloud.google.com/spot-vms).
 * Keep regular, redundant backups of essential data, such as analysis notes and samples. Test backups to ensure they work as expected.
-* When interacting with attacker C2 servers, use VPNs or disposable network interfaces. Do not use production networks and interfaces, which could reveal your identity to the attacker.
+* When interacting with attacker-owned C2 servers, use VPNs or disposable network interfaces. Do not use production networks and interfaces, which could reveal your identity to the attacker.
