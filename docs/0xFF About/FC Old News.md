@@ -4,6 +4,10 @@ title: "Old News"
 
 <h1>Old News</h1>
 
+### 2022.05.11
+
+After exploring malware's [early days](/0x00 History/01 In The Beginning/), witness the [malware explosion](/0x00 History/02 Malware Explosion/) of the 80s in the latest Malware History section!
+
 ### 2022.05.05
 
 We've established the [Malware History](/0x00 History/00 Sipping from the Fire Hose/) section, starting with history's earliest malware. Stay tuned for more!

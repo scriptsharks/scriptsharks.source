@@ -18,6 +18,10 @@ ScriptSharks aims to document the art and history of malware design and analysis
 
 ## News
 
+### 2022.10.24
+
+I've added the Design, Analysis and Resources sections. Check them out!
+
 ### 2022.09.15
 
 Check out the new [Ransomware Rising](/0x00 History/05 Ransomware Rising/) article in the history section, detailing malware trends in the 2010s!
@@ -33,10 +37,6 @@ After considerable reader feedback, I've finally added the [ScriptSharks.com Ori
 ### 2022.08.09
 
 The Malware History project continues with our exploration of [the 90s](/0x00 History/03 The 90s/) and the escalation of the digital arms race!
-
-### 2022.05.11
-
-After exploring malware's [early days](/0x00 History/01 In The Beginning/), witness the [malware explosion](/0x00 History/02 Malware Explosion/) of the 80s in the latest Malware History section!
 
 #### Archives
 

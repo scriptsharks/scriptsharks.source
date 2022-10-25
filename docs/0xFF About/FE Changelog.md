@@ -2,6 +2,10 @@
 title: "Changelog"
 ---
 
+# Version 0.2.3
+* Added the Design, Analysis and Resources sections.
+    * Includes information about hypervisors and basic toolsets.
+
 # Version 0.2.2
 * Added "Ransomware Rising" section.
     * This covers the 10s.
