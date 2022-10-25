@@ -12,8 +12,6 @@ Exploring the world of dangerous code.
 
 There's no getting rid of malware. Like the mythical hydra, for every strain we destroy, countless others arise in its place. Ever since [John Von Neumann](https://en.wikipedia.org/wiki/John_von_Neumann) published the [Theory of Self-Reproducing Automata](https://cba.mit.edu/events/03.11.ASE/docs/VonNeumann.pdf) in 1966, the state of the art of malware design has exploded in scope and complexity. Originally designed to ease our lives, computers have become weapons in the hands of unscrupulous threat actors.
 
-> "If you know the enemy and know yourself, you need not fear the result of a hundred battles." ~Sun Tzu, _The Art of War_
-
 ScriptSharks aims to document the art and history of malware design and analysis, in the hopes that this information will help defenders to understand and prevent malware attacks in the future. It is currently the work of a single author; as such, it will grow and expand along with the author's own knowledge and skill.
 
 ***
@@ -42,7 +40,7 @@ After exploring malware's [early days](/0x00 History/01 In The Beginning/), witn
 
 #### Archives
 
-Visit the [old news](/old news/) page for older updates.
+Visit the [old news](/0xFF About/FC Old News/) page for older updates.
 
 ***
 
