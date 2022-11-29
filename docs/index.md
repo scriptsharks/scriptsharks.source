@@ -20,7 +20,7 @@ ScriptSharks aims to document the art and history of malware design and analysis
 
 ### 2022.10.24
 
-I've added the Design, Analysis and Resources sections. Check them out!
+I've added the Design, Analysis and Tools sections. Check them out!
 
 ### 2022.09.15
 
