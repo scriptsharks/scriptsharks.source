@@ -70,13 +70,16 @@ It is foolish to attempt to cover every posible stage, tactic and technique in a
 
 Once the main payload is executed, it will typically deploy a command-and-control module, which will then use additional modules to handle persistence, privilege escalation, lateral movement, etc. This is a common design pattern, employed by countless malware families. In the case of ransomware, the malware will typically deploy data exfiltration and encryption modules, designed to steal and encrypt the victim's data.
 
-## Stagers, Payloads and Modules
+## Droppers, Stagers, Payloads and Modules
 
-Modern malware is typically divided into three distinct components:
+Modern malware is typically divided into a few distinct components:
 
-* Stagers: Small, lightweight code designed to download and execute the main payload.
-* Payloads: Typically a C2 implant, designed to execute modules and commands provided by the C2 server.
-* Modules: Specialized code launched and managed by the implant, designed to perform specific tasks.
+* Droppers: A self-contained package designed to deliver and launch a malware stager.
+* Stagers: Lightweight code designed to install a malware payload onto a system.
+* Payloads: Typically a C2 implant, providing remote command and control to attackers.
+* Modules: Single-purpose, specialized code, designed for use with a modular C2 implant.
+
+We will explore each component in more detail in the following sections.
 
 # Don't Infect Yourself
 
