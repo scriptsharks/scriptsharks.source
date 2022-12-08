@@ -18,13 +18,15 @@ Malware droppers should aim for the following features:
 
 # Dropper Examples
 
+## The Maldoc
+
 When it comes to dropper design, simplicity is key. Historically, Microsoft Office was one of the most popular tools for creating malware droppers. This was partly due to the suite's global popularity, as well as the inclusion of a built-in scripting language, VBA.
 
 Creating a "maldoc" dropper was fairly simple. To start, the attacker would have a malware stager, often in the form of a PowerShell script, which could be delivered as a "one-liner" or as a script. The attacker would then create a Microsoft Word or Excel document, and embed the stager in the document as a VBA macro. When opened, the maldoc would execute the embedded macro-script, which would in turn launch the stager.
 
 This approach was highly effective due to the prevalence of Mirosoft Office in corporate environments. Employees commonly sent and received Office documents via email as part of their job duties, so they rarely thought twice about opening a maldoc.
 
-However, in July of 2022, Microsoft released a patch that disabled VBA macros by default, which crippled the effectiveness of "maldoc" droppers. In response, threat actors have adopted a variety of other dropper techniques.
+However, in July of 2022, Microsoft released a patch that disabled VBA macros by default, which crippled the effectiveness of "maldoc" droppers. In response, threat actors have migrated to other dropper techniques.
 
 ## The LNK Dropper
 
@@ -38,7 +40,7 @@ In 2015, attackers used `.lnk` files to [hide malware execution](https://www.avi
 
 This was as simple as creating a shortcut, then modifying its "target" attribute to point to `cmd.exe` with a crafted command line, like so:
 
-```
+```sh
 cmd.exe /c start malware.vbs & start legit_file.exe & exit
 ```
 
@@ -54,4 +56,4 @@ The early ISO droppers were fairly simple, containing a malicious `.exe` file ma
 
 Adversaries have been abusing HTML and in-browser scripting languages since the dawn of time (or at least [since 1998](https://www.wired.com/1998/11/virus-thrives-on-html/)). This trend continued [into the 2010s](https://www.virusbulletin.com/virusbulletin/2010/10/it-s-just-spam-it-can-t-hurt-right), and still takes place [today](https://blog.barracuda.com/2022/06/28/threat-spotlight-malicious-html-attachments/). With HTML and JavaScript, attackers can easily create an inconspicuous-looking dropper by embedding a Base64-encoded malware package within a JavaScript wrapper which, when the HTML file is opened, will trigger a "download" of the decoded package to the user's hard drive.
 
-This dropper method is popular for a number of reasons: it doesn't involve common red-flag file extensions (like `.exe`, `.dll`, `.ps1`, etc.); many email scanners don't look deeply into the source code of HTML attachments; and it's easy to craft the HTML to look like a trustworthy website, aiding in deception.
+This dropper method is popular for a number of reasons: it doesn't involve common red-flag file extensions (like `.exe`, `.dll`, `.ps1`, etc.); embedded JavaScript code can be obfuscated to hide their contents from email attachment scanners; and it's easy to mimic the look of a trustworthy website, aiding in deception.
