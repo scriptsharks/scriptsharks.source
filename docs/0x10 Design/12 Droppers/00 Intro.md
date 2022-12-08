@@ -1,5 +1,5 @@
 ---
-title: "Droppers"
+title: "Dropper Basics"
 ---
 
 # What's a Dropper?
@@ -38,7 +38,7 @@ In 2015, attackers used `.lnk` files to [hide malware execution](https://www.avi
 
 This was as simple as creating a shortcut, then modifying its "target" attribute to point to `cmd.exe` with a crafted command line, like so:
 
-```powershell
+```
 cmd.exe /c start malware.vbs & start legit_file.exe & exit
 ```
 
@@ -55,7 +55,3 @@ The early ISO droppers were fairly simple, containing a malicious `.exe` file ma
 Adversaries have been abusing HTML and in-browser scripting languages since the dawn of time (or at least [since 1998](https://www.wired.com/1998/11/virus-thrives-on-html/)). This trend continued [into the 2010s](https://www.virusbulletin.com/virusbulletin/2010/10/it-s-just-spam-it-can-t-hurt-right), and still takes place [today](https://blog.barracuda.com/2022/06/28/threat-spotlight-malicious-html-attachments/). With HTML and JavaScript, attackers can easily create an inconspicuous-looking dropper by embedding a Base64-encoded malware package within a JavaScript wrapper which, when the HTML file is opened, will trigger a "download" of the decoded package to the user's hard drive.
 
 This dropper method is popular for a number of reasons: it doesn't involve common red-flag file extensions (like `.exe`, `.dll`, `.ps1`, etc.); many email scanners don't look deeply into the source code of HTML attachments; and it's easy to craft the HTML to look like a trustworthy website, aiding in deception.
-
-# Building a Dropper
-
-[wip]

@@ -1,5 +1,5 @@
 ---
-title: "Stagers"
+title: "Stager Basics"
 ---
 
 # What's a Stager?
