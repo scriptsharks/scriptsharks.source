@@ -6,9 +6,13 @@ title: "Step 0: Designing a Dropper"
 
 In the [introduction to droppers](/0x10%20Design/12%20Droppers/00%20Intro/#dropper-examples), we introduced Maldocs, as well as LNK, ISO and HTML droppers. After maldocs were crippled in 2022, threat actors adopted the other three methods, often in combination. In this section, we'll design our own dropper, mirroring a common attack pattern observed in malicious phishing email attachments.
 
+## The Con
+
+Phishing emails are the most common method by which malware is distributed. With this in mind, let's build a dropper for a hypothetical "fraudulent charge" phishing scam. In this common ruse, criminals pose as banks or online retailers, sending a "fraud prevention" notice to vitcims. The emails urge victims to respond quickly to avoid paying for a series of high-value purchases. We'll disguise our dropper as an invoice, attached to the phishing email, which will launch a malware stager.
+
 ## Design Goals
 
-Phishing emails are the most common method by which malware is distributed. Therefore, we'll design our dropper as an HTML email attachment. Since this is a [Proof-of-Concept](https://en.wikipedia.org/wiki/Proof_of_concept) (PoC), rather than a proper phishing email intended to deceive a real victim, we won't spend much time on disguising the HTML to look like a legitimate website. (Real-world attackers often send HTML attachments without any visible content at all, so this isn't a huge sacrifice.) Instead, we'll just focus on the essentials of this common attack pattern:
+Since this is a [Proof-of-Concept](https://en.wikipedia.org/wiki/Proof_of_concept) (PoC) and not part of a real-world phishing campaign, we'll keep things simple and focus on the key elements of this common attack pattern:
 
 `Phishing Email -> HTML -> ISO -> LNK -> Stager`
 
@@ -18,7 +22,7 @@ Phishing emails are the most common method by which malware is distributed. Ther
 4. The ISO will contain a hidden directory and a LNK file, disguised as a WordPad document.
 5. The LNK file will launch a PowerShell stager located in the hidden directory.
 
-Since our focus is dropper desgign, we'll use a simpel PoC stager, which will create a file called "INFECTED.TXT" on the victim's desktop, then exit. When the dropper is complete, it should be easy enough to swap out the PoC stager for something more robust.
+Since our focus is dropper desgign, we'll use a minimal stager. When the dropper is complete, it should be easy enough to swap this out for something more robust.
 
 ## Build Process
 

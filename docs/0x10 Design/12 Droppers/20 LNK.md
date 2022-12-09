@@ -6,7 +6,7 @@ title: "Step 1: Stager and LNK"
 
 ## Preparing our Environment
 
-On your Windows VM, open the file explorer and create a new directory called `PoC Dropper` (or whatever you like). Inside, create a subdirectory called `iso`, containing another subdirectory called `stager`. At the end of this section, once we've completed construction of the stager and LNK file, you should have a directory tree similar to the following:
+In a Windows VM, create a new directory called `PoC Dropper`. Inside, create a subdirectory called `iso`, containing another subdirectory called `stager`. At the end of this section, once we've built the stager and LNK file, the directory tree will look like this:
 
 ```sh
 PoC Dropper/
@@ -17,25 +17,29 @@ PoC Dropper/
 └── make_lnk.ps1
 ```
 
-The `iso` folder will be used for construction of the ISO file in Step 2.
+The `iso` folder will be used for construction of the ISO file in [Step 2](/0x10%20Design/12%20Droppers/30%20ISO/).
 
-## PoC Stager
+## A Basic Stager
 
-The whole purpose of our dropper is to execute a stager on the victim's system. Therefore, we'll need a stager. In [the Stager section](/0x10%20Design/13%20Stagers/00%20Intro/) we'll cover stager design, but for now a simple PoC will suffice. Since we're targeting Windows, we'll use PowerShell for our stager code. Create a file called `stager.ps1` inside the `stager` subdirectory. Paste the following line into the `stager.ps1` file:
+We're designing a dropper to launch a stager. Thus, we'll need to build a stager before the dropper can be tested. There's no need to build a fully-functional stager though; a simple PoC will suffice. Since we're targeting Windows, we'll write our PoC stager in PowerShell:
 
 ```sh
 "Infected!" | Out-File -FilePath $HOME\Desktop\INFECTED.TXT
 ```
 
-When executed, this stager will write the string `Infected!` into a file called `INFECTED.TXT` on the victim's desktop. Easy enough!
+When run, the script will write `Infected!` to a file called `INFECTED.TXT` on the victim's desktop. The TXT file proves the dropper's success. Save the script in the `stager` directory as `stager.ps1`.
 
-## LNK Dropper
+With that out of the way, let's build a dropper.
 
-Continuing with the theme of simplicity, we'll craft our LNK file with only a rudimentary disguise. The purpose of this file is to launch the stager script, while appearing to be a legitimate document. For this disguise, we will simply tell the LNK file to use the icon from the `WordPad.exe` binary.
+## LNK Construction
 
-Why WordPad, instead of Microsoft Word? Simple: WordPad is bundled with Windows, whereas Word is sold separately. LNK files borrow icons from other files. For an LNK to use a custom icon, that icon must exist on the victim's system. If we use the icon from MS Word, but the victim doesn't have Word on their PC, then the LNK file icon will be broken. Using WordPad, however, this problem is averted, as every Windows system includes WordPad by default.
+To entice victims, our dropper will be disguised as an invoice (per the "fraudulent charge" phishing scheme). To achieve this disguise, the LNK file will use the WordPad icon, so that it looks like a text document. In addition, it will use the `.doc.lnk` double-extension. By default, Windows hides the extensions of known filetypes; with the double-extension trick, coupled with the WordPad icon, it will appear as if the LNK is actually a Microsoft Word document.
 
-In the `PoC Dropper` directory, create a script called `make_lnk.ps1`, with the following contents:
+You may be wondering: "If we're disguising the dropper as a Microsoft Word document, why are we usig an icon from WordPad?" LNK files do not include built-in icons; instead, they "borrow" icons from other files on the system. If we use the MS Word icon, but the victim doesn't have MS Word installed, the LNK file icon will be broken, and the deception will be incomplete. This problem is averted with WordPad, which has been bundled with every Windows release since Windows 95.
+
+Our dropper doesn't have to be perfect. It just has to be good enough to fool one or two people.
+
+To construct the LNK file, we'll once again be using PowerShell. In the `PoC Dropper` directory, create a script called `make_lnk.ps1`, with the following contents:
 
 ```sh
 # Configure the launcher.
@@ -52,7 +56,7 @@ $lnk.IconLocation = "$icon,0"; # Use the first icon from the target binary.
 $lnk.save();
 ```
 
-This script performs the following steps:
+Here's what the script does:
 
 1. Create a new `WScript.Shell` object.
 2. Use the resulting object to create a new LNK file at `.\iso\Invoice_1234.doc.lnk`.
@@ -60,40 +64,49 @@ This script performs the following steps:
     * The [available options](https://www.devguru.com/content/technologies/wsh/wshshortcut-windowstyle.html) are `1`, `3`, and `7`.
     * Style `7` tells Windows to launch the shortcut in a minimized window.
 4. Set the `TargetPath` and `Arguments` attributes to launch our stager.
+    * Fun fact: These arguments can be abbreviated, and capitalization doesn't matter.
+    * E.g. this also works: `-non -nop -ex byp -w hid -fi .\stager\stager.ps1`
 5. Set the `IconLocation` to the first icon from `wordpad.exe`.
+    * Some apps ship with [multiple icons](https://www.codeproject.com/Articles/19580/Embedding-Multiple-Icons-into-NET-Executables).
 6. Save the `.lnk` file to the previously-specified location.
 
-### Executing the LNK Builder
-
-Once the script has been written, run it with PowerShell:
+Once the script is saved, run it with PowerShell:
 
 ```sh
 C:\Users\MalDev\Desktop\PoC Dropper>powershell.exe -file .\make_lnk.ps1
 ```
 
-When this completes, looking in the `iso` directory, you should see the following:
+When it's complete, you should see the following items in the `iso` directory:
 
 ![Screenshot from inside the `iso` directory, showing the `stager` subdirectory and the `Invoice_1234.doc.lnk` file.](./img/lnk.jpg)
 
-The `stager` directory contains a single file: `stager.ps1`. As we can see from the screenshot, the `Invoice_1234.doc.lnk` file uses the WordPad icon. This icon, coupled with the fact that Windows hides file extensions by default, makes it appear as if the `.lnk` file is actually a `.doc` file.
-
-Phishing emails will often use the "unauthorized purchase" ploy, claiming that the victim will be charged for some expensive purchase unless they respond quickly to cancel the transaction. This sense of pending financial loss causes unwary readers to panic, and to find a way to stop the charge. This urgency encourages them to open malicious attachments, especially when they have names like `Receipt_Order-F33216` or `Invoice_281845`. Victims are likely to open these files, hoping to learn more about the unexpected purchase.
+The `stager` directory contains the PoC PowerShell stager. The `Invoice_1234.doc.lnk` file uses the WordPad icon. Coupled with the double-extension trick, this completes the illusion.
 
 ## Testing the Dropper
 
-Since our stager payload is a benign PoC, we can safely launch the LNK file to ensure it behaves as expected. When executed, you may see a new item appear on the task bar for a moment before vanishing:
+Since our PoC stager is benign, we can safely test the LNK file. When executed, a new item appears on the task bar for a split second before vanishing:
 
 ![Screenshot showing the minimized window, named `Invoice_1234.doc`.](./img/minimized.jpg)
 
-After execution, if the dropper and stager worked properly, you should find a file called `INFECTED.TXT` on the desktop.
+If the dropper and stager worked properly, you will find a file called `INFECTED.TXT` on the desktop.
 
 # Improving the Design
 
-We've disguised the dropper as an invoice document with clever naming and using the `.doc.lnk` double-extension. However, there's one simple problem: When a user opens a `.doc` file, they expect Microsoft Word (or WordPad) to open a document. If a user opens our `Invoice_1234.doc.lnk` file and nothing happens, they may try launching it again, and may become suspicious when they see that nothing opens.
+Thanks to the dropper's disguise, when a vitcim opens the file, they expect Microsoft Word (or another text editor) to appear. Yet, aside from the brief blip on the task bar, nothing happens! This may arouse suspicion. To account for this, we can create a real Microsoft Word document called `Invoice_1234.doc`, store it in the `stager` directory, and launch it along with the stager. Thus, while the victim examines an official-looking statement, our stager will run in the background.
 
-To account for this, we could create a legitimate-looking Microsoft Word file called `Invoice_1234.doc`, and store it in the `stager` directory. This file could be launched as part of the `.lnk` arguments, or could be launched by the `stager.ps1` script. That way, while the stager code is running in the background, the user will be greeted by an official-looking document, as they expected.
+This, of course, requires us to design an official-looking statement. Producing an authentic-looking design can take significant time and effort; any inconsistency or flaw could break the deception. Therefore, we must spend painstaking hours ensuring that our fake invoice is _absolutely perfect_.
 
-This, of course, requires that you create a legitimate-looking invoice file. On the other hand, you could simply create a fake invoice file, fill it with some garbled data, and save it as `Invoice_1234.doc`, then corrupt the document by splitting it in half. Here's some PowerShell code that will perform this task:
+Or, if you're like me, you could just say "sod it" and create a corrupted document. Here's how:
+
+1. Create a fake invoice file.
+    * Don't worry about formatting.
+    * Slap an official-looking logo at the top of the page.
+    * List some expensive charges (such as a laptop and accessories).
+    * Maybe add an incomplete bit about how to appeal charges. Cut it off mid-sentence.
+2. Save the file as `Invoice_1234.doc`, in the `stager` directory.
+3. Chop the file in half, resulting in a corrupted and incomplete document.
+
+Here's some PowerShell code to chop your DOC in half:
 
 ```sh
 $relativepath = "stager\Invoice_1234.doc";
@@ -110,8 +123,6 @@ $outfile.Write($buffer, 0, $newsize);
 $outfile.close();
 ```
 
-This opens the `stager\Invoice_1234.doc` file, reads its contents, deletes the file, then writes a new file (with the same name) containing the first half of the original file. The result is a corrupted `.doc` file that will, when opened in Microsoft Word, generate an error stating that the file could not be read.
+This opens the document, saves half of the file into a buffer, then deletes and re-creates the file with only half of its data. The result, when opened in Microsoft Word, will generate an error stating that the file could not be read. Faced with this error, victims may believe that the attachment got corrupted somehow, rather than suspecting malware. If they attempt file recovery, they'll see a bit of text, possibly even the embedded logo, as they would expect from a corrupted file.
 
-When launching the dropper with the broken `.doc` file, the victim is more likely to believe the file was corrupted, rather than malicious. (A corrupted `.doc` is more believable than no `.doc` at all.)
-
-We will leave it as an exercise for the reader to add this corrupted `.doc` to the LNK dropper.
+Launching the document as part of the LNK dropper is fairly straightforward; I'll leave this as an exercise for the reader. (For a hint, revisit the LNK section of the [Dropper Basics](/0x10%20Design/12%20Droppers/00%20Intro/#the-lnk-dropper) page.)
