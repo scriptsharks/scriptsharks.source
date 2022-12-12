@@ -154,3 +154,4 @@ site/
 *.code-workspace
 .DS_Store
 .ctagsd/
+Pipfile

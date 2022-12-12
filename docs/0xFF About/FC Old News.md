@@ -4,6 +4,10 @@ title: "Old News"
 
 <h1>Old News</h1>
 
+### 2022.08.09
+
+The Malware History project continues with our exploration of [the 90s](/0x00 History/03 The 90s/) and the escalation of the digital arms race!
+
 ### 2022.05.11
 
 After exploring malware's [early days](/0x00 History/01 In The Beginning/), witness the [malware explosion](/0x00 History/02 Malware Explosion/) of the 80s in the latest Malware History section!
