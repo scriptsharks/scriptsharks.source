@@ -2,6 +2,12 @@
 title: "Changelog"
 ---
 
+# Version 0.3.0
+* Added information for HTML, ISO and LNK droppers.
+    * Historical overview.
+    * Design walk-through.
+* Restructured the page a bit.
+
 # Version 0.2.3
 * Added the Design, Analysis and Resources sections.
     * Includes information about hypervisors and basic toolsets.

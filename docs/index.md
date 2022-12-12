@@ -18,9 +18,13 @@ ScriptSharks aims to document the art and history of malware design and analysis
 
 ## News
 
+### 2022.12.12
+
+Learn about a currently-trending dropper design by [building it yourself](/0x10%20Design/12%20Droppers/00%20Intro/)!
+
 ### 2022.10.24
 
-I've added the Design, Analysis and Tools sections. Check them out!
+We've added the Design, Analysis and Tools sections. Check them out!
 
 ### 2022.09.15
 
@@ -28,15 +32,11 @@ Check out the new [Ransomware Rising](/0x00 History/05 Ransomware Rising/) artic
 
 ### 2022.08.24
 
-I added [Millenial Malware](/0x00 History/04 Millenial Malware/) to the history section. Spoiler: It's just so many worms, all over the place...
+We added [Millenial Malware](/0x00 History/04 Millenial Malware/) to the history section. Spoiler: It's just so many worms, all over the place...
 
 ### 2022.08.23
 
-After considerable reader feedback, I've finally added the [ScriptSharks.com Origin Story](/0xFF About/FD Origins/). Check it out to learn about the site's history!
-
-### 2022.08.09
-
-The Malware History project continues with our exploration of [the 90s](/0x00 History/03 The 90s/) and the escalation of the digital arms race!
+After considerable reader feedback, We've finally added the [ScriptSharks.com Origin Story](/0xFF About/FD Origins/). Check it out to learn about the site's history!
 
 #### Archives
 

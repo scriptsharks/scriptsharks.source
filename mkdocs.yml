@@ -13,4 +13,4 @@ theme:
     article_nav_bottom: true
 extra:
     logo: img/logo.png
-    version: 0.2.3
+    version: 0.3.0
