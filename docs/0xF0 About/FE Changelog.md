@@ -2,6 +2,9 @@
 title: "Changelog"
 ---
 
+# Version 0.3.1
+* Minor revision, enumerating pages.
+
 # Version 0.3.0
 * Added information for HTML, ISO and LNK droppers.
     * Historical overview.
