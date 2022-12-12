@@ -36,11 +36,11 @@ We added [Millenial Malware](/0x00 History/04 Millenial Malware/) to the history
 
 ### 2022.08.23
 
-After considerable reader feedback, We've finally added the [ScriptSharks.com Origin Story](/0xFF About/FD Origins/). Check it out to learn about the site's history!
+After considerable reader feedback, We've finally added the [ScriptSharks.com Origin Story](/0xF0 About/FD Origins/). Check it out to learn about the site's history!
 
 #### Archives
 
-Visit the [old news](/0xFF About/FC Old News/) page for older updates.
+Visit the [old news](/0xF0 About/FC Old News/) page for older updates.
 
 ***
 

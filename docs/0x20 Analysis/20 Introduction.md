@@ -1,5 +1,5 @@
 ---
-title: "Know the Enemy"
+title: "20 Know the Enemy"
 ---
 
 > "If you know the enemy and know yourself, you need not fear the result of a hundred battles." ~Sun Tzu, _The Art of War_
