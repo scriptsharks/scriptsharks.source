@@ -116,19 +116,63 @@ In the above example, the two `None` parts are likely the body of the email, and
 
 Modern email clients often include both a plaintext and HTML-formatted version of the email. This allows the client to display the email in the format that the user prefers. The two above sections represent the plaintext and HTML versions of the message body.
 
-Sometimes it may be beneficial to export the contents of a `Message` object. For example, the `statement.htm` attachment is a large HTML file, and will be easier to analyze in a text editor or browser. To extract the contents of a `Message` object, you can use the `as_string()` and `as_bytes()` methods:
+To view a flat representation of a Message object, you can use the `as_string()` and `as_bytes()` methods:
 
 ```python
->>> # Export as string:
->>> with open("statement.htm", "w") as f:
-...     f.write(parts[4].as_string())
+>>> # View message as string:
+>>> strpart = parts[4].as_string()
+>>> strpart[:70]
+'Content-Type: text/html; name="statement.htm"\nContent-Description: sta'
+>>> # View message as bytes:
+>>> binpart = parts[4].as_bytes()
+>>> binpart[:70]
+b'Content-Type: text/html; name="statement.htm"\nContent-Description: sta'
+```
+
+Sometimes it may be beneficial to export the contents of a `Message` object. For example, the `statement.htm` attachment is a large and unwieldly HTML file, making it hard to manipulate in an interactive Python session. It will be easier to analyze the file in a text editor or browser. To extract the contents of a `Message` object, you can retrieve the object's payload:
+
+```python
+>>> contents = parts[4].get_payload()
+>>> contents[:70]
+'PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KICAgIDxzdHlsZT4KICAgICAgICBodG'
+```
+
+In this case, the payload is Base64-encoded. We can decode this with the `base64` library:
+
+```python
+>>> from base64 import b64decode
+>>> decoded = b64decode(contents)
+>>> decoded[:70]
+b'<!DOCTYPE html>\n<html>\n<head>\n    <style>\n        html {\n            f'
+```
+
+From here, it is fairly simple to save the decoded `statement.htm` file:
+
+```python
+>>> fname = parts[4].get_filename()
+>>> fname
+'statement.htm'
+>>> with open(fname, "wb") as outfile:
+...     outfile.write(decoded)
 ... 
-2691831
->>> # Export as bytes:
->>> with open("statement.htm", "wb") as f:
-...     f.write(parts[4].as_bytes())
-... 
-2691831
+1992525
+```
+
+In the above example, we use the `get_filename` from the `Message` object to find the original name of the attached file. However, we could just as easily name it whatever we want. Once the file has been written, it can be analyzed on its own:
+
+```sh
+analyst@labvm email_sample % head -n 10 statement.htm 
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        html {
+            font-size: calc(1em*.625);
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        body {
+            font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+analyst@labvm email_sample %
 ```
 
 For more information on using Python to manipulate `.eml` files, check out the [official documentation](https://docs.python.org/3/library/email.html).
