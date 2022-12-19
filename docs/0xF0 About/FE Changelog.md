@@ -2,6 +2,14 @@
 title: "Changelog"
 ---
 
+# Version 0.3.2
+* Added a note regarding attribution to the Analysis intro.
+* Updated the Email File analysis section to fix some code issues.
+* Added new content:
+    * HTML and JavaScript analysis.
+    * ISO file analysis.
+    * Unix `file` utility.
+
 # Version 0.3.1
 * Minor revision, enumerating pages.
 

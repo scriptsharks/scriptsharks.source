@@ -18,6 +18,9 @@ ScriptSharks aims to document the art and history of malware design and analysis
 
 ## News
 
+### 2022.12.19
+We've added new sections regarding [HTML and JavaScript](/0x20%20Analysis/22%20Language%20Tricks/HTML%20and%20JS/) language tricks, [analyzing ISO files](/0x20%20Analysis/21%20File%20Forensics/ISOs/), and the [handy Unix `file` utility](/0x30%20Tools%20of%20the%20Trade/31%20File%20Manipulation/Metadata/).
+
 ### 2022.12.12
 
 Learn about a currently-trending dropper design by [building it yourself](/0x10%20Design/12%20Droppers/00%20Intro/)!
@@ -33,10 +36,6 @@ Check out the new [Ransomware Rising](/0x00 History/05 Ransomware Rising/) artic
 ### 2022.08.24
 
 We added [Millenial Malware](/0x00 History/04 Millenial Malware/) to the history section. Spoiler: It's just so many worms, all over the place...
-
-### 2022.08.23
-
-After considerable reader feedback, We've finally added the [ScriptSharks.com Origin Story](/0xF0 About/FD Origins/). Check it out to learn about the site's history!
 
 #### Archives
 
