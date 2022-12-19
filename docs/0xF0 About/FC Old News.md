@@ -4,6 +4,10 @@ title: "Old News"
 
 <h1>Old News</h1>
 
+### 2022.08.23
+
+After considerable reader feedback, We've finally added the [ScriptSharks.com Origin Story](/0xF0 About/FD Origins/). Check it out to learn about the site's history!
+
 ### 2022.08.09
 
 The Malware History project continues with our exploration of [the 90s](/0x00 History/03 The 90s/) and the escalation of the digital arms race!

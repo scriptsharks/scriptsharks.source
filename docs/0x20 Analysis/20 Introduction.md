@@ -22,6 +22,12 @@ Attackers will do everything in their power to thwart analysis—from obfuscatin
 
 The threat landscape evolves at a rapid pace; rather than attempting to perform a full analysis of every new sample, it is better to triage, prioritize, and analyze samples according to their potential impact, postponing lower-priority samples for later analysis.
 
+## Regarding Attribution
+
+When a breach takes place, the first question everyone asks is "Who is responsible?" This is often a difficult question to answer, and it is best to avoid haphazard guesses. Attribution can help defenders understand an adversary; if their strategies are known, defenders can respond accordingly. However, _mis-attribution_ can cause defenders to focus in the wrong places, and can cause trouble when one group takes the blame for another's actions. It is common for advanced threat actors to imitate the behaviors of other threat actors, to muddle attribution.
+
+Rather than focusing heavily on attribution, it is better to ask, "How can we detect and prevent this in the future?" By analyzing how malware functions and propagates, we can reveal attack patterns—and build defenses—which are threat-agnostic. This protects systems against _all_ attackers, not just specific threats.
+
 # Keeping it Safe
 
 Malware analysis is a dangerous business. Malware authors are constantly developing new techniques, not only to thwart analysis, but in some cases, to [damage or infect researchers' systems](https://blog.google/threat-analysis-group/new-campaign-targeting-security-researchers/). It is essential to protect your analysis environment from data loss and infection. The following steps will help you keep your analysis environment safe:
