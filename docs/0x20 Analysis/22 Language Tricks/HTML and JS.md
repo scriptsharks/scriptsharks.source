@@ -95,13 +95,13 @@ As stated, the file has nearly 22 thousand lines. Looking at the code, we can se
 >>> lines = []
 >>> for line in contents:
 ...     try:
-...         match = re.search('\\+"([A-Za-z0-9\\+/=]+)"', line).group(1)
+...         match = re.search('\\+?"([A-Za-z0-9\\+/=]+)"', line).group(1)
 ...         lines.append(match)
 ...     except AttributeError:
 ...         pass
 ... 
 >>> len(lines)
-21845
+21857
 >>> lines[0]
 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
 ```
@@ -111,7 +111,7 @@ We've successfully extracted the Base64 lines from the HTML file. Let's reassemb
 ```python
 >>> payload = "".join(lines)
 >>> len(payload)
-1660172
+1660296
 >>> payload[:20]
 'AAAAAAAAAAAAAAAAAAAA'
 ```
@@ -126,7 +126,7 @@ b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x
 >>> with open("documents.iso","wb") as outfile:
 ...     outfile.write(decoded)
 ... 
-1245127
+1245184
 ```
 
 Excellent! We have successfully extracted the embedded file from the HTML dropper.
